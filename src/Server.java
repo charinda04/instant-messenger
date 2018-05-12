@@ -85,4 +85,44 @@ public class Server extends JFrame{
         }while (!message.equals("CLIENT - END"))
     }
 
+
+    //close streams and sockets after you done chatting
+    private void closeCrap(){
+
+        showMessage("\n Closing connection... \n");
+        ableToType(false);
+        try {
+            output.close();
+            input.close();
+            connection.close();
+
+        }catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+    }
+
+    //send a message to client
+    private void sendMessage(String message){
+        try {
+            output.writeObject("Server - "+ message);
+            output.flush();
+            showMessage("\nSERVER - "+ message);
+        }catch (IOException ioException){
+            chatWindow.append("\n ERROR: DUDE I CAN'T SEND THAT MESSAGE");
+        }
+    }
+
+
+    //updates chat window
+    private void showMessage(final String text){
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        chatWindow.append(text);
+                    }
+                }
+        );
+    }
+
 }
