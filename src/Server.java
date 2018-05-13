@@ -71,7 +71,7 @@ public class Server extends JFrame{
     //during the chat conversation
     private void whileChatting() throws IOException{
         String message = " You are now connected ";
-        sednMessage(message);
+        sendMessage(message);
         ableToType(true);
         do {
             try {
@@ -82,7 +82,7 @@ public class Server extends JFrame{
                 showMessage("\n idk wtf user sent" );
             }
 
-        }while (!message.equals("CLIENT - END"))
+        }while (!message.equals("CLIENT - END"));
     }
 
 
@@ -120,6 +120,18 @@ public class Server extends JFrame{
                     @Override
                     public void run() {
                         chatWindow.append(text);
+                    }
+                }
+        );
+    }
+
+    //let user type stuff into their box
+    private void ableToType(final boolean tof){
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        userText.setEditable(tof);
                     }
                 }
         );
