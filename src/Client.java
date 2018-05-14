@@ -27,7 +27,13 @@ public class Client {
                         userText.setText("");
                     }
                 }
-        )
+        );
+        add(userText, BorderLayout.NORTH);
+        chatWindow = new JTextArea();
+        add(new JScrollPane(chatWindow), BorderLayout.CENTER);
+        setSize(300,150);
+        setVisible(true);
+
 
     }
 }
