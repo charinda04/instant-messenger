@@ -23,7 +23,7 @@ public class Client extends JFrame{
                 new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        sendData(actionEvent.getActionCommand());
+                        sendMessage(actionEvent.getActionCommand());
                         userText.setText("");
                     }
                 }
@@ -82,6 +82,31 @@ public class Client extends JFrame{
         }while (!message.equals("SERVER - END"));
     }
 
+
+    //close the streams and sockets
+    private void closeCrap(){
+        showMessage("\n closing crap down");
+        ableToType(false);
+        try {
+            output.close();
+            input.close();
+            connection,clone();
+        }catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+    }
+
+
+    //send messages to server
+    private void sendMessage(String message){
+        try {
+            output.writeObject("CLIENT - " + message);
+            output.flush();
+            showMessage("\n CLIENT - " + message);
+        }catch (IOException ioException){
+            chatWindow.append("\n something messed up sending message hoss!");
+        }
+    }
 
 
 }
