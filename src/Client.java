@@ -66,4 +66,22 @@ public class Client extends JFrame{
         input = new ObjectInputStream(connection.getInputStream());
         showMesssage("\n dude your streams are now good to go");
     }
+
+
+
+    //while chatting with server
+    private void whileChatting() throws IOException{
+        ableToType(true);
+        do {
+            try {
+                message = (String)input.readObject();
+                showMessage("\n" + message);
+            }catch (ClassNotFoundException classNotFoundException){
+                showMessage("\n I do not know that object type");
+            }
+        }while (!message.equals("SERVER - END"));
+    }
+
+
+
 }
