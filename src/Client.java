@@ -49,4 +49,21 @@ public class Client extends JFrame{
             closeCrap();
         }
     }
+
+
+    //connect to server
+    private void connectToServer() throws IOException{
+        showMessage("Attempting connection... \n");
+        connection = new Socket(InetAddress.getByName(serverIP), 6789);
+        showMessage("Connect to: " + connection.getInetAddress().getHostName());
+    }
+
+
+    //set up streamsFirsh unata kara ithin
+    private void setupStreams() throws IOException{
+        output = new ObjectOutputStream(connection.getOutputStream());
+        output.flush();
+        input = new ObjectInputStream(connection.getInputStream());
+        showMesssage("\n dude your streams are now good to go");
+    }
 }
