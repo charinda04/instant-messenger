@@ -64,7 +64,7 @@ public class Client extends JFrame{
         output = new ObjectOutputStream(connection.getOutputStream());
         output.flush();
         input = new ObjectInputStream(connection.getInputStream());
-        showMesssage("\n dude your streams are now good to go");
+        showMessage("\n dude your streams are now good to go");
     }
 
 
@@ -90,7 +90,7 @@ public class Client extends JFrame{
         try {
             output.close();
             input.close();
-            connection,clone();
+            connection.close();
         }catch (IOException ioException){
             ioException.printStackTrace();
         }
@@ -108,5 +108,30 @@ public class Client extends JFrame{
         }
     }
 
+
+    //change / update chat window
+    private void showMessage(final String m){
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        chatWindow.append(m);
+                    }
+                }
+        );
+    }
+
+
+    //gives user permission to type crap into the box
+    private void ableToType(final boolean tof){
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        userText.setEditable(tof);
+                    }
+                }
+        );
+    }
 
 }
